@@ -17,7 +17,6 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatSelectModule } from '@angular/material/select'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 
-
 const modules = [
   MatSlideToggleModule,
   MatGridListModule,

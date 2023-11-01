@@ -15,16 +15,16 @@ export class TicketsComponent implements OnInit {
   }
   ticketNumber: number | null = null
   success = false
+  loading = false
   constructor(
     private readonly apollo: Apollo,
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
 
   submitTicket() {
+    this.loading = true
     this.success = false
     const createTicket = gql`
       mutation createTicket($email: String!, $content: String!, $authorName: String!) {
@@ -50,6 +50,7 @@ export class TicketsComponent implements OnInit {
           console.log('there was an error sending the query', error)
         }
       )
+    this.loading = false
   }
 
   openSnackBar(message: string) {

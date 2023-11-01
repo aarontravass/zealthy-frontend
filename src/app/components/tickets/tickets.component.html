@@ -1,45 +1,47 @@
 <div class="parent">
   <form class="example-form" (ngSubmit)="submitTicket()">
-
     <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
-          <mat-form-field >
+          <mat-form-field>
             <mat-label>email</mat-label>
-            <input type="email" matInput [(ngModel)]="body.email" placeholder="Email" name="email" #email="ngModel">
-
+            <input type="email" matInput [(ngModel)]="body.email" placeholder="Email" name="email" #email="ngModel" />
           </mat-form-field>
         </td>
         <td>
-          <mat-form-field >
-              <mat-label>Name</mat-label>
-              <input type="text" matInput [(ngModel)]="body.authorName" placeholder="Name" name="authorName" #authorName="ngModel">
-  
-            </mat-form-field>
-        </td>
-      </tr>
-  </table>
-  <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-              <mat-label>Comments</mat-label>
-              <textarea matInput [(ngModel)]="body.content" name="content" #content="ngModel"></textarea>
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input
+              type="text"
+              matInput
+              [(ngModel)]="body.authorName"
+              placeholder="Name"
+              name="authorName"
+              #authorName="ngModel"
+            />
           </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-          <td>
-          </td>
-        </tr>
-      <tr>
-        <td>
-          <button mat-raised-button name="submit" color="primary" type="submit">Submit Ticket</button>
-
         </td>
       </tr>
     </table>
-    <p *ngIf="success">Your ticket Number is {{ticketNumber}}</p>
-
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Comments</mat-label>
+            <textarea matInput [(ngModel)]="body.content" name="content" #content="ngModel"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <button mat-raised-button name="submit" color="primary" type="submit">Submit Ticket</button>
+        </td>
+      </tr>
+    </table>
+    <mat-spinner *ngIf="loading"></mat-spinner>
+    <p *ngIf="success">Your ticket Number is {{ ticketNumber }}</p>
   </form>
 </div>
