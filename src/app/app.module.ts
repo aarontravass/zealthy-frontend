@@ -13,9 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MaterialModule } from './material.module'
 import { AuthInterceptorService } from './services/auth-interceptor.service'
 import { LoginComponent } from './components/login/login.component'
+import { NotfoundComponent } from './components/notfound/notfound.component'
 
 @NgModule({
-  declarations: [AppComponent, TicketsComponent, LoginComponent],
+  declarations: [AppComponent, TicketsComponent, LoginComponent, NotfoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
