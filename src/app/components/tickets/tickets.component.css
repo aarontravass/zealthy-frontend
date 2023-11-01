@@ -1,4 +1,4 @@
-table{
+table {
   justify-content: center;
   text-align: center;
 }
@@ -12,6 +12,6 @@ table{
   font-size: 20px;
 }
 
-.example-full-width{
+.example-full-width {
   width: 100%;
 }

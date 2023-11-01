@@ -12,9 +12,10 @@ import { CommonModule } from '@angular/common'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MaterialModule } from './material.module'
 import { AuthInterceptorService } from './services/auth-interceptor.service'
+import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
-  declarations: [AppComponent, TicketsComponent],
+  declarations: [AppComponent, TicketsComponent, LoginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

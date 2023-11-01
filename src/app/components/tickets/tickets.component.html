@@ -1,47 +1,72 @@
-<div class="parent">
-  <form class="example-form" (ngSubmit)="submitTicket()">
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <mat-form-field>
-            <mat-label>email</mat-label>
-            <input type="email" matInput [(ngModel)]="body.email" placeholder="Email" name="email" #email="ngModel" />
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input
-              type="text"
-              matInput
-              [(ngModel)]="body.authorName"
-              placeholder="Name"
-              name="authorName"
-              #authorName="ngModel"
-            />
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
-    <table class="example-full-width" cellspacing="0">
-      <tr>
-        <td>
-          <mat-form-field class="example-full-width">
-            <mat-label>Comments</mat-label>
-            <textarea matInput [(ngModel)]="body.content" name="content" #content="ngModel"></textarea>
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td></td>
-      </tr>
-      <tr>
-        <td>
-          <button mat-raised-button name="submit" color="primary" type="submit">Submit Ticket</button>
-        </td>
-      </tr>
-    </table>
-    <mat-spinner *ngIf="loading"></mat-spinner>
-    <p *ngIf="success">Your ticket Number is {{ ticketNumber }}</p>
-  </form>
-</div>
+<mat-grid-list cols="2" rowHeight="1:1">
+  <mat-grid-tile>
+    <img src="../../../assets/images/support.jpg" width="85%" />
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div class="parent">
+      <h1>Having issues?</h1>
+      <h1>Submit a support ticket!</h1>
+      <form class="example-form" (ngSubmit)="submitTicket()">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input
+                  type="email"
+                  matInput
+                  [(ngModel)]="body.email"
+                  placeholder="Email"
+                  name="email"
+                  #email="ngModel"
+                  required=""
+                />
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <mat-label>Name</mat-label>
+                <input
+                  type="text"
+                  matInput
+                  [(ngModel)]="body.authorName"
+                  placeholder="Name"
+                  name="authorName"
+                  #authorName="ngModel"
+                  required=""
+                />
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <mat-label>Comments</mat-label>
+                <textarea
+                  matInput
+                  [(ngModel)]="body.content"
+                  name="content"
+                  #content="ngModel"
+                  maxlength="500"
+                  required=""
+                ></textarea>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+          </tr>
+          <tr>
+            <td>
+              <button mat-raised-button name="submit" color="primary" type="submit">Submit Ticket</button>
+            </td>
+          </tr>
+        </table>
+        <mat-spinner *ngIf="loading"></mat-spinner>
+        <p *ngIf="success">Your ticket Number is {{ ticketNumber }}</p>
+      </form>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>

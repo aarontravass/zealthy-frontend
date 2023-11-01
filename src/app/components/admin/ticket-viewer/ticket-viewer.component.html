@@ -1,52 +1,82 @@
 <p>
-  <mat-toolbar>
-    <span>Ticket Viewer</span>
+  <mat-toolbar color="primary">
+    <span><a routerLink="../" style="text-decoration: none; color: white">Dashboard</a> / <a>Ticket Viewer</a></span>
     <span class="example-spacer"></span>
     <button mat-icon-button class="example-icon logout-icon">
       <mat-icon>logout</mat-icon>
     </button>
   </mat-toolbar>
 </p>
-
-<mat-card>
-  <mat-card-header>
-    <mat-card-title>Ticket Number: {{ ticket.ticketNumber }}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-label>Update Status</mat-label>
-    <mat-form-field *ngIf="ticket.status">
-      <mat-select [(value)]="ticket.status" (selectionChange)="updateStatus()">
-        <mat-option *ngFor="let status of ticketStatus" [value]="status">
-          {{ status }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </mat-card-content>
-</mat-card>
-
-<form (ngSubmit)="submitComment()">
-  <mat-form-field class="example-full-width">
-    <mat-label>Leave a comment</mat-label>
-    <textarea
-      [(ngModel)]="newComment.comment"
-      name="comment"
-      #comment="ngModel"
-      matInput
-      required
-      maxlength="500"
-    ></textarea>
-  </mat-form-field>
-  <button mat-raised-button color="primary" type="submit">Submit</button>
-</form>
-
-<mat-card *ngFor="let comment of ticket.comments">
-  <mat-card-header>
-    <mat-card-title>Author: {{ comment.author?.firstName + ' ' + comment.author?.lastName }}</mat-card-title>
-    <mat-card-subtitle>Added at: {{ comment.createdAt | date: 'short' }}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>
-      {{ comment.comment }}
-    </p>
-  </mat-card-content>
-</mat-card>
+<div>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Ticket Number: {{ ticket.ticketNumber }}</mat-card-title>
+          <mat-card-subtitle><br /></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-form-field *ngIf="ticket.status">
+            <mat-label>Update Status</mat-label>
+            <mat-select [(value)]="ticket.status" (selectionChange)="updateStatus()">
+              <mat-option *ngFor="let status of ticketStatus" [value]="status">
+                {{ status }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <h2>Name: {{ ticket.authorName }}</h2>
+          <p>
+            Email: <a [href]="'mailto:' + ticket.email">{{ ticket.email }}</a>
+          </p>
+          <p>Content: {{ ticket.content }}</p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <form (ngSubmit)="submitComment()" #commentsForm="ngForm" autocomplete="off" accept-charset="UTF-8">
+        <div style="display: inline-block; margin: 10px">
+          <mat-form-field class="example-full-width">
+            <mat-label>Leave a comment</mat-label>
+            <textarea
+              style="resize: none"
+              [(ngModel)]="newComment.comment"
+              name="comment"
+              #comment="ngModel"
+              matInput
+              required
+              minlength="10"
+              maxlength="500"
+              rows="5"
+              cols="12"
+            ></textarea>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block">
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+<br />
+<div></div>
+<h1 style="text-align: center">Comments</h1>
+<mat-grid-list cols="3" rowHeight="3:1" *ngFor="let comment of ticket.comments">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Author: {{ comment.author?.firstName + ' ' + comment.author?.lastName }}</mat-card-title>
+        <mat-card-subtitle
+          ><a [href]="'mailto:' + comment.author?.email">{{ comment.author?.email }}</a></mat-card-subtitle
+        >
+        <mat-card-subtitle>Added at: {{ comment.createdAt | date: 'long' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{ comment.comment }}
+        </p>
+      </mat-card-content>
+    </mat-card> </mat-grid-tile
+  ><mat-grid-tile> </mat-grid-tile>
+</mat-grid-list>

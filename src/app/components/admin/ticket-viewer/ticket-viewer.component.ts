@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { Apollo, gql } from 'apollo-angular'
 import { Ticket } from '../../../models/Ticket'
 import { Comment } from '../../../models/Comment'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-ticket-viewer',
@@ -13,7 +14,8 @@ export class TicketViewerComponent implements OnInit {
   constructor(
     private readonly router: Router,
     private readonly apollo: Apollo,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private _snackBar: MatSnackBar
   ) {}
 
   ticketId: string | undefined
@@ -36,6 +38,7 @@ export class TicketViewerComponent implements OnInit {
           authorName
           content
           createdAt
+          email
           id
           status
           ticketNumber
@@ -103,6 +106,7 @@ export class TicketViewerComponent implements OnInit {
           this.ticket.comments?.push(result.data.addComment)
           console.log(result)
           this.newComment = {}
+          this.openSnackBar('Your comment has been submitted successfully and an email has been sent!')
         },
         (error) => {
           console.error(error)
@@ -127,10 +131,16 @@ export class TicketViewerComponent implements OnInit {
         }
       })
       .subscribe(
-        (result) => {},
+        (result) => {
+          this.openSnackBar('status has been updated')
+        },
         (error) => {
           console.error(error)
         }
       )
+  }
+
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'OK', { duration: 3000 })
   }
 }

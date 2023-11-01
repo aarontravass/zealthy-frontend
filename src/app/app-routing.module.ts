@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { TicketsComponent } from './components/tickets/tickets.component'
-import { LoginComponent } from './components/admin/login/login.component'
-import { DashboardComponent } from './components/admin/dashboard/dashboard.component'
-import { TicketViewerComponent } from './components/admin/ticket-viewer/ticket-viewer.component'
+import { LoginComponent } from './components/login/login.component'
 
 const routes: Routes = [
   {
-    path: 'ticket/submit',
+    path: '',
     component: TicketsComponent
   },
   {
@@ -16,16 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    children: [
-      {
-        path: '',
-        component: DashboardComponent
-      },
-      {
-        path: 'ticket-viewer',
-        component: TicketViewerComponent
-      }
-    ]
+    loadChildren: () => import('./components/admin/admin.module').then((module) => module.AdminModule)
   }
 ]
 
